@@ -8,7 +8,7 @@ export function createImages(query) {
     q: query,
     image_type: 'photo',
     orientation: 'horizontal',
-    safesearch: true,
+    safesearch: 'true',
   };
   return axios.get(BASE_URL, { params });
 }

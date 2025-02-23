@@ -12,7 +12,8 @@ export const refs = {
 };
 refs.form.addEventListener('submit', e => {
   e.preventDefault();
-  const query = refs.input.value.trim();
+  const query = e.target.elements.input.value.trim();
+  //   const query = refs.input.value.trim();
 
   if (query === '') {
     iziToast.error({
@@ -23,7 +24,7 @@ refs.form.addEventListener('submit', e => {
     return;
   }
   createImages(query)
-    .then(data => {
+    .then(({ data }) => {
       if (data.hits.length === 0) {
         iziToast.info({
           title: 'No Results',
@@ -32,9 +33,11 @@ refs.form.addEventListener('submit', e => {
         });
       } else {
         const markup = imagesTemplate(data.hits);
+
         refs.gallery.innerHTML = markup;
       }
     })
+
     .catch(error => {
       iziToast.error({
         title: 'Error',
