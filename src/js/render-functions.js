@@ -12,7 +12,7 @@ function imageTemplate(img) {
     comments,
     downloads,
   } = img;
-  return `<li class="gallery-item">
+  return `<li class="photo-card">
   <a class="gallery-link" href="${img.largeImageURL}">
     <img
       class="gallery-image"
@@ -20,7 +20,7 @@ function imageTemplate(img) {
       alt="${img.tags}"
     />
   </a>
-  <div class="image-info">
+  <div class="info">
         <p>Likes: <span class="likes">${img.likes}</span></p>
         <p>Views: <span class="views">${img.views}</span></p>
         <p>Comments: <span class="comments">${img.comments}</span></p>
@@ -28,8 +28,22 @@ function imageTemplate(img) {
       </div>
 </li>`;
 }
-export function imagesTemplate(arr) {
-  return arr.map(imageTemplate).join('');
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
-  //   lightbox.refresh();
+export function showLoader() {
+  refs.gallery.classList.add('hidden');
+  refs.loader.classList.remove('hidden');
+}
+export function hideLoader() {
+  refs.loader.classList.add('hidden');
+  refs.galleryImages.classList.remove('hidden');
+}
+
+export function imagesTemplate(arr) {
+  lightbox.refresh();
+  hideLoader();
+  return arr.map(imageTemplate).join('');
 }

@@ -1,5 +1,6 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+// import { hideLoader, showLoader } from './js/render-functions';
 
 import { createImages } from './js/pixabay-api';
 import { imagesTemplate } from './js/render-functions';
@@ -7,12 +8,14 @@ import { imagesTemplate } from './js/render-functions';
 export const refs = {
   form: document.querySelector('.search-form'),
   input: document.querySelector('#input'),
-  button: document.querySelector('#search-button'),
+  button: document.querySelector('.search-button'),
   gallery: document.querySelector('.gallery'),
+  loader: document.querySelector('.loader-box'),
 };
 refs.form.addEventListener('submit', e => {
   e.preventDefault();
   const query = e.target.elements.input.value.trim();
+  //   showLoader();
   //   const query = refs.input.value.trim();
 
   if (query === '') {
@@ -39,6 +42,7 @@ refs.form.addEventListener('submit', e => {
     })
 
     .catch(error => {
+      //   hideLoader();
       iziToast.error({
         title: 'Error',
         message: `❌ Error fetching images. Please try again!`,
