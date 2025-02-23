@@ -30,5 +30,6 @@ function imageTemplate(img) {
 }
 export function imagesTemplate(arr) {
   return arr.map(imageTemplate).join('');
-  lightbox.refresh();
+
+  //   lightbox.refresh();
 }
