@@ -1,6 +1,6 @@
-import { refs } from '../main';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { refs } from './pixabay-api';
 
 function imageTemplate(img) {
   const {
@@ -12,7 +12,7 @@ function imageTemplate(img) {
     comments,
     downloads,
   } = img;
-  return `<li class="photo-card">
+  const markup = `<li class="photo-card">
   <a class="gallery-link" href="${img.largeImageURL}">
     <img
       class="gallery-image"
@@ -27,7 +27,9 @@ function imageTemplate(img) {
         <p>Downloads: <span class="downloads">${img.downloads}</span></p>
       </div>
 </li>`;
+  return markup;
 }
+
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
@@ -39,7 +41,7 @@ export function showLoader() {
 }
 export function hideLoader() {
   refs.loader.classList.add('hidden');
-  refs.galleryImages.classList.remove('hidden');
+  refs.gallery.classList.remove('hidden');
 }
 
 export function imagesTemplate(arr) {
