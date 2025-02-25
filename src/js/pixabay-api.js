@@ -36,6 +36,7 @@ export function createImages(query) {
         const markup = imagesTemplate(data.hits);
 
         refs.gallery.innerHTML = markup;
+        hideLoader();
       }
     })
 
